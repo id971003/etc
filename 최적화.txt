@@ -1,0 +1,70 @@
+asset dependency
+
+
+Audio Source
+
+Force To Mono : 스테레오 x 모노 o [반드시]
+
+load type
+	decompress on load (<256kb) : 앞축 풀어 메모리에올림
+		장점 : 재생속도빠름
+		단단점 : 앞축풀어서 용량이 개커짐
+	compressed into memory (<1mb) : 앵간하면 이거쓰자 decompress 말고
+		장점 : 반응속도 빠름
+	streaming(>1mb) : 배경음들
+		장점 : 대충해두댐
+		단점 : 반응속도느림
+		
+Compressionformat
+	짧으면 ADPCM
+	대부분 VORBIS
+
+MUTE 되어도 메모리는 존재
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+
+TEXTMESH PRO : 폰트 를미리 아틀라스 화시킴 [ 이미지처럼]
+STATIC VS DYNAMIC
+
+static : 사용될 모든 문자 아틀라스 미리 생성함 
+	런타임에 원본 폰트 필요없음
+dynamic
+	실시간으로 필요 폰트 아틀라스 갱신
+	따라서 원본 폰트가 올라감
+
+multi atlas texture : tmp 만들때 4096 하면 느려짐 하지만 그렇다고 2096 으로하면 아틀라스 2개됨 그래서 보통 이걸킴
+	근디 키면 draw call 발생 확률이높음
+	즉 킴[draw call vs 끔4096으로함[atlas resolutio 대역폭] 중 고민해야함
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+Texture
+모바일에선 astc 로 하면됨 앵간하면
+디테일이 높을수록 nxn 에서 n 이 작아짐
+
+pot vs npot : 
+pot  (power of tow) : 128,256,521,1024...
+astc 는 npot(notpot) : 사이즈지원
+
+하지만 3d 는 mipmap 때문에 pot 해야함
+ui 및 2d 는 npot 가능
+	하지만 sprite atlass 권장하고 sprite atlass 가 pot 임
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+mipmap :이미지가 작아지는[멀거나 작은] 애들은 해상도가 낮은 텍스처를입혀 랜더링 성능을 확보
+	3d 에서 주로사용 메모리가 33.333..% 늘어남 
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+SceneLoding
+
+A>B 로넘어가는과정
+A로드 >B로드 >A 제거
+즉 이미 있던 A 가 메모리에 있는상태에서 B를 로드함 
+A 메모리가 크면 B로딩하다 메모리터저버릴수도있음
+그래서 씬과 씬 로딩할때 중간 씬을 넣어놓자 존나 쪼꼬만
+이렇게바꾼단거임
+A: before , b : after ,c 가변씬
+A로드 > C 로드 >A 제거 >B로드 >C제거
+
+
+
+
