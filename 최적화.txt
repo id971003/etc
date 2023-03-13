@@ -3,7 +3,7 @@ asset dependency
 
 Audio Source
 
-Force To Mono : 스테레오 x 모노 o [반드시]
+Force To Mono : 스테레오 x 모노 o [모바일 기준 - 반드시]
 
 load type
 	decompress on load (<256kb) : 앞축 풀어 메모리에올림
