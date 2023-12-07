@@ -1,5 +1,11 @@
-made by 7rzr, update 2023-3-28
-코드규칙
+made by 7rzr, update 2023-12-08
+
+최적화 원칙
+1. 아직 하지말자
+2. 아직도 하지말자
+3. 그냥하지말자
+최적화를 할지말지 고려하는 시간 조차 아까울 수 있으니 하드웨어가 버틸 수 있으면 빠르게 코드찍어내는게 더좋을수도 있다는 말 같다
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
 *대학교수말이니 정확히 듣지는 말자 
 C++vs  C# (ingameDev)
@@ -8,33 +14,26 @@ C++
 Class 구축은 편함
 C#
 gc가알아서처리하니 대충하자? [가벼운 Cpp 같은느낌]
-비어있는걸 알아서쓰셍 [abstruct or niterface]
+비어있는걸 알아서쓰셍 [abstruct or interface]
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-
-Uinty 특징
-1. component
+component
 unreal[C++] 이미 뭔가 만들어 놨다 이거 써라 
 but
 unity[C#] 니들이 알아서 만들어써라
 몬스터 A 를만들라면
 몬스터 A 를만드는게아니라 component A',B',C' 을만들어라
 그래서 몬스터 B 를만들때 몬스터 A 에서 썼던 component A',B',C 기능이 또있다면 또 가따써라
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
-2.broadcasting
+broadcasting
 명시적 선언이없어도 컴포넌트 name 을 기준으로 간접실행함
-
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-프로그래밍
-논리적사고를 프로그래밍 문법에 맞게 작성하는것  
+
 
 asset dependency
-
-
-
 Audio Source
-
 Force To Mono : 스테레오 x 모노 o [모바일 기준 - 반드시]
-
 load type
 	decompress on load (<256kb) : 앞축 풀어 메모리에올림
 		장점 : 재생속도빠름
@@ -44,22 +43,17 @@ load type
 	streaming(>1mb) : 배경음들
 		장점 : 대충해두댐
 		단점 : 반응속도느림
-		
 Compressionformat
 	짧으면 ADPCM
 	대부분 VORBIS
 
 MUTE 되어도 메모리는 존재
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-
-
 TEXTMESH PRO : 폰트 를미리 아틀라스 화시킴 [ 이미지처럼]
 STATIC VS DYNAMIC
-
 static : 사용될 모든 문자 아틀라스 미리 생성함 
 	런타임에 원본 폰트 필요없음
-dynamic
-	실시간으로 필요 폰트 아틀라스 갱신
+dynamic : 실시간으로 필요 폰트 아틀라스 갱신
 	따라서 원본 폰트가 올라감
 
 multi atlas texture : tmp 만들때 4096 하면 느려짐 하지만 그렇다고 2096 으로하면 아틀라스 2개됨 그래서 보통 이걸킴
@@ -94,7 +88,6 @@ A 메모리가 크면 B로딩하다 메모리터저버릴수도있음
 이렇게바꾼단거임
 A: before , b : after ,c 가변씬
 A로드 > C 로드 >A 제거 >B로드 >C제거
-
 
 
 
