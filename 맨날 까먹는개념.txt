@@ -1,0 +1,13 @@
+made by 7rzr, update 2023-12-18
+
+라이브러리 정리하다 겁나 안 외워저서 맨날 삽질해서 알아내는 개념들 정리했다.
+
+1. Start 랑 Awake 는 한번만 된다.
+씬이동할때[DontDesTroy일때]] 뭔가 Start 랑 Awake 중 하나는 한번더 작동할것 처럼생겼다.
+
+2. Start 는무조건 동작하는건 아니다.
+Ex 딴놈이 Awake 에서 생성하고 뒤에서 바로 Awake 에서 파괴하면 스크립트 순서에 따라 
+
+3. Awake 는 무조건 발동한다.
+A에서 B 하라고 Awake 에서 때리고 ScriptExcutionOrder 에서 A 먼저 실행하게해도 B의 Awake 는 작동한다[왜지?]
+

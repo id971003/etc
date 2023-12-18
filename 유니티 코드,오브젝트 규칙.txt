@@ -24,5 +24,3 @@ ObjectPoolerref;
 8. 싱글톤 보단 static 클래스 이용
 
 9. #regeion 적극활용
-
-10. 
