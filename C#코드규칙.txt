@@ -9,9 +9,9 @@ made by 7rzr, update 2023-3-28
 
 2. 지역변수와 매개변수 , public 이 아닌 클래스는 카멜 케이스.
 
-3. 메스드에 returntype 이 있으면 return_xxx  으로 시작.
+3. 메스드에 returntype 이 있으면 Return_xxx  으로 시작.
 
-4. const readonly 는 전부 대문자.
+4. const readonly 은 전부 대문자.
 
 5. bool 변수는 b_xxx로시작
 
@@ -111,32 +111,12 @@ public bool Return_Login(int playerCode)
 32. list 의 크기 미리 알면 capacity 미리 할당
 TestList.Capacity=AA.count;
 
-33. 코루틴 vs unitask
 
-코루틴단점 : 서버로부터 받은 enumerator 타입 함수를 리턴할수없음
-startcoroutin 은 gc 할당이 높음
-new 지속할당이 문제
+33. 자료구조 배열이면 끝 S 넣기 다른타입은 앞에 "타입_" 넣어주기
+ex)
+Datas
+List_Data
+Dic_Data
 
-unitask 장점 : 
-struct 기반으로 제작 [zero allocation 메모리 안잡아먹음]
-서버로받은 값 return 가능
-unitask.yield 와 같이 코루틴과 유사함
-메모리 누수 방지위한 tasktracker창 지원
-
-private async UniTaskVoid Wait1SceondAsync()
-yield return new waitforsceond(1) > await UniTask.Delay(timeSpan.FromSecond(1));
-yield return new waitforRealeTimesceond(1) > await UniTask.Delay(timeSpan.FromSecond(1),DelayTime.UncaledDeltaTime); //timescle 무시
-Wait1SceondAsync().Forget(); // 반환 형식이 void 일경우 Forget 넣음 
-yield return new WaitUnitl(()=>count==3) > await unitask.waituntil(()=>count==3)
-
-stopcoroutin 
-> CancellationTokenSource _source = new();
-await UniTask.Delay(time.span.fromSeconds(3),cancelationToken" _source.Token);
-하면 _source.Canel 일시 멈춤
-etc) stopcoroutine 쓰러면 미리 캐싱해야  : yield return new waitforsecond(3)  기다리는동안 멈추면 이후 동작안함
-메모리 해제 안됨
-OnDestroy(()=> _source.Cancel() , _source.Dispose() 해줘야함
-유니테스크에선 취소하는 개념이 장점임
-this.GetCancellationTokenOnDestroy() 넣으면 삭제 되었을때 테스크 자동종료됨
 
 

@@ -14,3 +14,32 @@ A에서 B 하라고 Awake 에서 때리고 ScriptExcutionOrder 에서 A 먼저 �
 4. 무조건 Awake >Enable > Start 순이아니다
 오브젝트 생성과 동시에 그 오브젝트안에있는 스크립트의 함수를 실행하면 [Instancelate(a).getcomponent<b>.c()]  Awake > Enable > C[함수] > Start 로 된다
 [왜인지는모름]
+
+
+5. 코루틴 vs unitask
+
+코루틴단점 : 서버로부터 받은 enumerator 타입 함수를 리턴할수없음
+startcoroutin 은 gc 할당이 높음
+new 지속할당이 문제
+
+unitask 장점 : 
+struct 기반으로 제작 [zero allocation 메모리 안잡아먹음]
+서버로받은 값 return 가능
+unitask.yield 와 같이 코루틴과 유사함
+메모리 누수 방지위한 tasktracker창 지원
+
+private async UniTaskVoid Wait1SceondAsync()
+yield return new waitforsceond(1) > await UniTask.Delay(timeSpan.FromSecond(1));
+yield return new waitforRealeTimesceond(1) > await UniTask.Delay(timeSpan.FromSecond(1),DelayTime.UncaledDeltaTime); //timescle 무시
+Wait1SceondAsync().Forget(); // 반환 형식이 void 일경우 Forget 넣음 
+yield return new WaitUnitl(()=>count==3) > await unitask.waituntil(()=>count==3)
+
+stopcoroutin 
+> CancellationTokenSource _source = new();
+await UniTask.Delay(time.span.fromSeconds(3),cancelationToken" _source.Token);
+하면 _source.Canel 일시 멈춤
+etc) stopcoroutine 쓰러면 미리 캐싱해야  : yield return new waitforsecond(3)  기다리는동안 멈추면 이후 동작안함
+메모리 해제 안됨
+OnDestroy(()=> _source.Cancel() , _source.Dispose() 해줘야함
+유니테스크에선 취소하는 개념이 장점임
+this.GetCancellationTokenOnDestroy() 넣으면 삭제 되었을때 테스크 자동종료됨

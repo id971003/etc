@@ -1,0 +1,11 @@
+Euler angle.
+	걍 오브젝트 딱 누르면 나오는 좌표계
+	직관적으로 사용하기 편함 
+	Gimbal  lock 문제가 있다
+		*Gimbal lock : 두개 회전축 겹쳐 회전안되는거
+
+Quaternion
+	Gimbal lock 해결하려고 만든거
+
+
+이 2개가 있는데 유니티의 모든 객체는 rotation 값을 내부적으론 Quaternio 으로 사용함 근디 우린 Euler Angle 이 편하니까 바꿔서 사용하면됨
