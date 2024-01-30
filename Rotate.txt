@@ -1,11 +1,37 @@
-Euler angle.
+개념
+이 2개가 있는데 유니티의 모든 객체는 rotation 값을 내부적으론 Quaternio 으로 사용함 근디 우린 Euler Angle 이 편하니까 바꿔서 사용하면됨
+
+Euler angle [우리가 아는 백터값]
 	걍 오브젝트 딱 누르면 나오는 좌표계
 	직관적으로 사용하기 편함 
 	Gimbal  lock 문제가 있다
 		*Gimbal lock : 두개 회전축 겹쳐 회전안되는거
 
-Quaternion
+Quaternion [4원소 체계]
 	Gimbal lock 해결하려고 만든거
 
 
-이 2개가 있는데 유니티의 모든 객체는 rotation 값을 내부적으론 Quaternio 으로 사용함 근디 우린 Euler Angle 이 편하니까 바꿔서 사용하면됨
+
+활용 : 함수 4개만 알자
+
+Quaternion.Euler : vecter3 를 인자로받고 quaternion은 뱉는다
+아래함수들중 Rotation 이랑 Rotate 같은애들은 인자로 Quaternion 을 줘야한다 근디 Quaternion 값은 우리가 쓰기어려워서 걍 vector3 를 quaternion 으로 바꾼다고생각하면된다
+
+
+Transfrom.Rotation : Quaternion 을 받고 그방향으로 회전값을 맞춘다
+예를들어  Quaternion.Euler(new Vector3(0,30,0)) 를 하면 회전축역시 (0,30,0) 그대로 넘어간다 Transform.Position 에 직접 값넣어주는거 비슷한거
+
+Transform.Rotate : Euler 값 [vector3] 를 받고 그방향으로 회전한다.
+계속그방향으로 회전 된다고 생각하면됨 Transform.translate 비슷한놈
+
+
+Transform.Forward : 
+오브젝트에  Forward 라는 프로퍼티를 해당 transform 에다가 고정시킨다고 보면된다.
+자기자신을 기준으로하기 하기때문에 바라보는거 update 에 넣고 오브젝트 막움직여도 바라보는 방향은 고정됨 [ Lootat과 차이 ]
+
+
+Transform.Forward : Transform,vector3을 받는다 , 
+해당 벡터를 바라본다 [해당벡터를 그냥 계속 본다고 생각하면 된다]
+ex ) 막 디펜스게임같은거할때 포탑이 타겟 따라 도는거하면될듯
+
+
