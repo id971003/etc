@@ -24,3 +24,6 @@ ObjectPoolerref;
 8. 싱글톤 보단 static 클래스 이용
 
 9. #regeion 적극활용
+
+10. Enum 타입이나 Const 타입 관리하는 네임스페이스 따로 만들어서 관리
+

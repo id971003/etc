@@ -1,0 +1,38 @@
+개념
+
+	World Point 
+		진짜 좌표위치 Object 의 Transfrom 의 Position 값
+	
+	Viewport Point
+		카메라 에서 위치가 차지하는 비율 (0~1로 나타남)
+	
+	ScreenPoint 
+		해상도비에 따라 좌표가나옴 1080x1920 짜리면 (0~1080,0~1920 까지 나오겠지)
+		ui 터치시 많이쓰는거같다
+
+
+
+	
+
+	
+
+활용
+Camera 에 있는 ~~to~~ 함수 이용해서 각좌표 와따리 가따리 거릴수있음
+	
+	World Point  <> Viewport Point
+		Camera.main.ViewportToWorldPoint , Camera.main.WorldToViewportPoint 를 통해서 변환 가능
+		언제쓰냐 ? Viewport 가 화면[카메라] 기준 어디에 있냐를 나타내다보니  오브젝트가 카메라에 있는지, 있으면 왼쪽 오른쪽 위아래 중 어디에 있는지 
+		알려줄때 쓴다
+
+	World Point  <> ScreenPoint 
+.		Camera.main.WorldToScreenPoint , Camera.main.ScreenToWorldPoint 를통해 서로 변환가능
+		언제쓰냐 ? 막 스크린 터치[screenpoint]에서 거기다가  게임오브젝트[world] 만들때 있자나 그때 input을 screenpoint 로 아웃풋을 worldpoint 로 만
+		들때 쓴다
+
+	Viewport Point <> ScreenPoint 
+		Camera.main.ViewportToWorldPoint, Camera.main.WorldToViewportPoint 를통해 변환가능
+		언제쓰냐? 음... 잘모르겠다 아직안써봄 
+	
+
+
+	
