@@ -1,0 +1,86 @@
+어드레서블 에셋
+
+0.이전
+유니티 리소스들 관리하는 페키지
+ResourcesFile , 에셋번들 다음 버전정도
+ResourceFile
+	단점
+	리소스가 Apk 내부에 존재
+	앱 빌드시간 및 시작시간 길어짐
+에셋번들
+	장점
+	리소스파일 단점 해결을 위해서 나옴
+	묶음단위로 에셋 관리
+	빌드사이즈 절약
+	앱 빌드시간 단축
+	
+	단점
+	번들의 종속성 [ 하드코딩 필요]
+	"번들과 에셋을 파일명[string] 으로 매칭시켜 오타 나면 뻥남"
+
+에드레서블 에셋
+	에셋에 주소 할당 시켜놓고 그 주소로 에셋 불러오는거다
+	에셋번들 토대로 설계된 시스템임 
+	
+	장점
+	에셋빌드의 배포 단순화 : 직접래퍼런스 , 리소스폴더, 에셋번들 분리 단순화됨
+	종속성 파악 및 메모리 로드 언로드 현황 확인가능
+	초기빌드 볼륨 최소화[에셋번들장점]
+	에셋별 동적로드 관리[메모리이득]
+	DLC 가능
+
+1.설정
+패키지매니저에서 어드레스블 설치하고 이용하면됨
+
+오드레서블그룹 만들면 CacheClearBehavior 의 값을 "ClearWhenWhenNewVersionLoaded"로 바꿔주자
+	어드레서블에셋설치시 기존꺼 제거한다는거임
+
+
+어드레서블시스템세팅
+	Unique bundle IDes 채크
+		체크하면 뭔가 추가될때마다 새로운것만 추가한다
+	SendProfilerEvent 채크
+		이벤트 뷰 창 통해 메모리 로드 언로드 확인가능
+	Build Remote Catalog 채크
+		Catalog 사본생성 후 서버 업로드 가능
+	Build&LoadPaths 는 Remote 설정
+		세팅에서말고 그룹에서도 Remote 로 변경해주자
+	
+
+2.사용
+프로젝트뷰에서 뭔가[프리펩스프라이트 등등] 선택후 인스펙터의 Adressable 클릭
+
+using UnityEngine.AddressableAssets 선언
+
+AssetReferenceGameObject 와 같이 알맞은 ref 타입을 설정
+
+그다음 인스펙터에 끌어다 넣으면 된다
+
+이후코드
+
+생성 : 
+InstantiateAsync Instantiate에 Async 추가된거
+
+	뒤에 콜백문 넣어서 끝나고 뭐할껀지 람다로 콜백 가능 obj.Result에가져온 친구 담김]
+            refname.InstantiateAsync().Completed+= (obj) =>
+            {
+                Go = obj.Result;
+            };
+
+삭제 
+ Addressables.ReleaseInstance(Target) nstantiateAsync 이용한거 지울때
+Target.ReleaseAsset  LoadAssetAsync 이용한거 지울때
+
+초기화 이용전 초기화해주자
+    IEnumerator INitAddressable()
+   {
+       var init = Addressables.InitializeAsync();
+       yield return init;
+   }
+
+3.빌드
+어드레서블 그룹에서 빌드 선택하고 빌드
+PlayModeScripte를 UseAssetDataBase로 만들어줌
+
+
+
