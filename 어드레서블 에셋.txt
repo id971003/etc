@@ -3,6 +3,7 @@
 0.이전
 유니티 리소스들 관리하는 페키지
 ResourcesFile , 에셋번들 다음 버전정도
+
 ResourceFile
 	단점
 	리소스가 Apk 내부에 존재
